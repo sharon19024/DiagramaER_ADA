@@ -1,0 +1,54 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table Cliente {
+  Cliente_ID integer [primary key]
+  Nombre_Cliente varchar
+  Direccion varchar
+  Correo_Electronico varchar 
+}
+
+Table Producto {
+  Producto_ID integer [primary key]
+  Nombre_Producto varchar
+  Precio integer
+  Descripcion varchar
+  Categoria_ID integer
+  Proveedor_ID integer
+}
+
+Table Orden {
+  Orden_ID integer [primary key]
+  fecha_de_orden varchar
+  Cliente_ID integer
+}
+
+Table Categoria {
+  Categoria_ID integer
+  Nombre varchar
+}
+
+Table Proveedor {
+  Proveedor_ID integer
+  Nombre varchar
+  Direccion varchar
+  Correo_Electronico_Proveedor varchar
+}
+
+Table Resena {
+  Resena_ID integer
+  Cliente_ID integer
+  Producto_ID integer
+  Puntuacion integer
+  Comentario varchar
+} 
+
+Ref: "Cliente"."Cliente_ID" < "Resena"."Cliente_ID"
+
+Ref: "Producto"."Producto_ID" < "Resena"."Producto_ID"
+
+Ref: "Cliente"."Cliente_ID" < "Orden"."Cliente_ID"
+
+Ref: "Categoria"."Categoria_ID" < "Producto"."Categoria_ID"
+
+Ref: "Proveedor"."Proveedor_ID" < "Producto"."Proveedor_ID"
